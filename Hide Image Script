@@ -1,0 +1,18 @@
+
+$(document).ready(function() {  
+  
+  
+  $('body').append('<a id="hide_images_link" href="javascript:;" style="position: fixed; top:0px;  right:0px; z-index: 1000;"> hide img </a>');
+ 
+  
+  $("#hide_images_link").click( function(){
+	
+    console.log( this );
+
+    $('img').hide();
+    $('iframe').hide();
+
+
+
+  })
+});
