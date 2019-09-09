@@ -1,3 +1,11 @@
+// ==UserScript==
+// @name     Script Img hidder
+// @version  1
+// @grant    none
+// @include  http*
+// @require  http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
+// ==/UserScript==
+
 
 $(document).ready(function() {  
   
@@ -16,3 +24,6 @@ $(document).ready(function() {
 
   })
 });
+
+
+
