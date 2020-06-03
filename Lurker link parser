@@ -1,0 +1,72 @@
+// ==UserScript==
+// @name     Lurker
+// @version  1.1
+// @grant    none
+// @include  http*
+// @require  http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
+// ==/UserScript==
+
+
+console.log('Lurker init');
+
+let link_pattern = "[title='Update']";
+let data_pattern = "#Fatturazione_cf";
+let founded_links = [];
+let collected_data = [];
+let interval_var;
+let win2;
+
+function openLink( url ){
+    win2 = window.open( url  );
+    setTimeout(parseData, 3000 );
+}
+
+function parseData(){
+    let data = $(win2.document).find(data_pattern).first().val();
+    collected_data.push( data );
+}
+
+function nextLink(){
+    url = founded_links.pop();
+
+    if( typeof win2 !== 'undefined' ){
+        win2.close();
+    }
+
+    if( typeof url !== 'undefined' ){
+        openLink( url );
+    } else {
+        clearInterval( interval_var );
+        console.log( collected_data );
+    }
+
+}
+
+
+$(document).ready(function() {
+
+
+
+    let iter = 0;
+    $( link_pattern ).each( function(){
+
+
+
+        if( iter > 4 ) return false;
+
+        console.log( this );
+
+        founded_links.push( $(this).prop('href') );
+
+        iter ++;
+
+
+
+    });
+  
+  	console.log("Founded " + founded_links.length +  " links");
+
+    interval_var = setInterval( nextLink, 5000 );
+
+});
+
